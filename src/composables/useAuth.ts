@@ -1,33 +1,32 @@
-import type { IUser } from '~/types/IUser';
+import type { UserWithoutPassword } from '~/types/IUser';
 
 export default function () {
-    const user = useState<IUser>('user', () => {
-        return {};
-    });
-    const loggedIn = useState('loggedIn', () => false);
+    const user = useState<UserWithoutPassword | null>('user', () => null);
+    const loggedIn = useState<boolean>('loggedIn', () => false);
     const errorMessage = useState('errorMessage', () => '');
-
-    const getUser = async () => {
-        try {
-            const response = await $fetch('/api/me');
-            user.value = response;
-            loggedIn.value = true;
-        } catch (err) {}
-    };
 
     const login = async ({ email, password }) => {
         errorMessage.value = '';
         try {
-            const response = await $fetch('/api/auth/login', {
+            const data: UserWithoutPassword = await $fetch('/api/auth/login', {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
             });
-            await getUser();
+            user.value = data;
+            loggedIn.value = true;
             navigateTo('/dashboard');
         } catch (err) {
             errorMessage.value = err.data.statusMessage;
         }
     };
 
-    return { loggedIn, user, getUser, login, errorMessage };
+    const me = async () => {
+        try {
+            const data = await $fetch('/api/me');
+            user.value = data;
+            loggedIn.value = true;
+        } catch (err) {}
+    };
+
+    return { errorMessage, loggedIn, user, login, me };
 }

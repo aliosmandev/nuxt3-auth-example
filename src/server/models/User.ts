@@ -1,7 +1,12 @@
+import type { IUser } from '~~/src/types/IUser';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
-const UserSchema: mongoose.Schema = new mongoose.Schema(
+interface IUserDocument extends IUser, Document {
+    validatePassword: (data: string) => Promise<boolean>;
+}
+
+const UserSchema: mongoose.Schema = new mongoose.Schema<IUser>(
     {
         email: { type: String, requied: true },
         password: { type: String, requied: true },
@@ -20,8 +25,8 @@ UserSchema.pre('save', async function (next) {
     }
 });
 
-UserSchema.methods.validatePassword = async function validatePassword(data) {
-    return bcrypt.compare(data, this.password);
+UserSchema.methods.validatePassword = async function validatePassword(password) {
+    return bcrypt.compare(password, this.password);
 };
 
-export default mongoose.model('users', UserSchema);
+export default mongoose.model<IUserDocument>('users', UserSchema);

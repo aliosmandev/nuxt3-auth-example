@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+    middleware: 'guest-only',
+});
+
 const { errorMessage, login } = useAuth();
 </script>
 

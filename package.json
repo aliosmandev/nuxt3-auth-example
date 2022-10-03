@@ -1,0 +1,23 @@
+{
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "@nuxtjs/tailwindcss": "^5.3.3",
+        "nuxt": "3.0.0-rc.11"
+    },
+    "dependencies": {
+        "@vee-validate/rules": "^4.5.11",
+        "axios": "^0.27.2",
+        "bcrypt": "^5.0.1",
+        "h3-typebox": "^0.3.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.6.2",
+        "vee-validate": "^4.5.11"
+    }
+}

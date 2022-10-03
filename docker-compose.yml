@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+    app:
+        build: .
+        container_name: app
+        restart: always
+        ports:
+            - '3000:3000'
+        depends_on:
+            - mongo
+        networks:
+            - app
+    mongo:
+        image: mongo
+        restart: always
+        volumes:
+            - mongodb:/usr/local/mongodb
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: rootroot
+            MONGO_INITDB_DATABASE: example
+        ports:
+            - 27017:27017
+        networks:
+            - app
+
+volumes:
+    mongodb:
+networks:
+    app:
+        driver: bridge

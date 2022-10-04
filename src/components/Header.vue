@@ -6,9 +6,9 @@ const { loggedIn } = useAuth();
 <template>
     <nav class="border-gray-200 px-2 sm:px-4 py-2.5 bg-gray-900">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
-            <a href="https://flowbite.com/" class="flex items-center">
+            <NuxtLink to="/" class="flex items-center">
                 <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Nuxt 3 Auth Example</span>
-            </a>
+            </NuxtLink>
 
             <div class="flex items-center justify-center">
                 <ul

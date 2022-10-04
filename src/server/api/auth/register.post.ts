@@ -8,8 +8,8 @@ export default defineEventHandler(async (event) => {
     const { email, password } = await validateBody(event, registerSchema);
 
     const user = await UserModal.findOne({ email });
-    if (user) return createError({ statusCode: 400, statusMessage: 'email alread user' });
+    if (user) return createError({ statusCode: 400, statusMessage: 'Email already user' });
 
     const newUser = await UserModal.create({ email, password });
-    return { code: 200, message: 'account created' };
+    return { code: 200, message: 'Account created' };
 });

@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     const user = await userModal.findOne({ email });
     if (user) {
         const validatePass = await user.validatePassword(password);
-        if (!validatePass) return createError({ statusCode: 400, statusMessage: 'your password is wrong' });
+        if (!validatePass) return createError({ statusCode: 400, statusMessage: 'Your password is wrong' });
 
         const token = jwt.sign({ id: user._id }, config.JWT_ACCESS_SECRET, { expiresIn: '1d' });
 
@@ -26,5 +26,5 @@ export default defineEventHandler(async (event) => {
         });
 
         return user;
-    } else return createError({ statusCode: 400, statusMessage: 'your email is wrong' });
+    } else return createError({ statusCode: 400, statusMessage: 'Your email is wrong' });
 });

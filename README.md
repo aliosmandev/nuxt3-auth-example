@@ -1,5 +1,7 @@
 # Nuxt 3 - Auth Example
 
+![vercel](https://therealsujitk-vercel-badge.vercel.app/?app=nuxt3-auth-example&style=for-the-badge&logo=false)
+
 Have a look at the Nuxt 3 [documentation](https://v3.nuxtjs.org).
 
 ## Setup

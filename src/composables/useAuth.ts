@@ -9,7 +9,6 @@ export default function () {
     const setUser = (user) => {
         user.value = user;
         loggedIn.value = true;
-        pending.value = false;
     };
 
     const login = async ({ email, password }) => {
@@ -25,6 +24,22 @@ export default function () {
         } catch (err) {
             errorMessage.value = err.data.statusMessage;
         }
+        pending.value = false;
+    };
+
+    const register = async ({ email, password }) => {
+        errorMessage.value = '';
+        pending.value = true;
+        try {
+            const data: UserWithoutPassword = await $fetch('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+            });
+            navigateTo('/auth/login');
+        } catch (err) {
+            errorMessage.value = err.data.statusMessage;
+        }
+        pending.value = false;
     };
 
     const me = async () => {
@@ -34,5 +49,5 @@ export default function () {
         } catch (err) {}
     };
 
-    return { errorMessage, loggedIn, pending, user, login, me };
+    return { errorMessage, loggedIn, pending, user, register, login, me };
 }

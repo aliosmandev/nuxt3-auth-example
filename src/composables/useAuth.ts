@@ -6,9 +6,9 @@ export default function () {
     const errorMessage = useState('errorMessage', () => '');
     const pending = useState('pending', () => false);
 
-    const setUser = (user) => {
-        user.value = user;
-        loggedIn.value = true;
+    const setUser = (data) => {
+        user.value = data;
+        loggedIn.value = Boolean(data);
     };
 
     const login = async ({ email, password }) => {
@@ -20,7 +20,7 @@ export default function () {
                 body: JSON.stringify({ email, password }),
             });
             setUser(data);
-            navigateTo('/dashboard');
+            await navigateTo('/');
         } catch (err) {
             errorMessage.value = err.data.statusMessage;
         }
@@ -35,11 +35,20 @@ export default function () {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
             });
-            navigateTo('/auth/login');
+            await navigateTo('/auth/login');
         } catch (err) {
             errorMessage.value = err.data.statusMessage;
         }
         pending.value = false;
+    };
+
+    const logout = async () => {
+        try {
+            const data: UserWithoutPassword = await $fetch('/api/auth/logout', {
+                method: 'POST',
+            });
+            setUser(null);
+        } catch (err) {}
     };
 
     const me = async () => {
@@ -49,5 +58,5 @@ export default function () {
         } catch (err) {}
     };
 
-    return { errorMessage, loggedIn, pending, user, register, login, me };
+    return { errorMessage, loggedIn, pending, user, register, login, logout, me };
 }

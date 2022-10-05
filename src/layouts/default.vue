@@ -3,8 +3,10 @@ import Header from '~/components/Header.vue';
 </script>
 
 <template>
-    <div class="">
+    <div>
         <Header />
-        <slot />
+        <main>
+            <slot />
+        </main>
     </div>
 </template>

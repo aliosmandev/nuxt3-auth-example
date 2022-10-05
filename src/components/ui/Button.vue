@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Spinner from '~/components/icons/Spinner.vue';
 const props = defineProps({
-    onClick: {
+    click: {
         type: Function,
         default: () => {},
     },
@@ -13,12 +13,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <button
-        :disabled="props.loading"
-        @onClick="props.onClick"
-        type="submit"
-        class="inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-white font-extrabold bg-indigo-800 hover:bg-indigo-900 border-3 border-indigo-900 shadow rounded transition duration-200 disabled:cursor-not-allowed disabled:opacity-60"
-    >
+    <button :disabled="props.loading" @click="props.click" type="submit" class="btn">
         <template v-if="props.loading">
             <Spinner />
         </template>

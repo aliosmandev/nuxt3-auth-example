@@ -13,6 +13,15 @@
 
   @layer components {
     .nav-link {
-      @apply block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
+      @apply block py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white
+    }
+    .btn {
+      @apply inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-white font-extrabold bg-indigo-800 hover:bg-indigo-900 border-2 border-indigo-900 shadow rounded transition duration-200 disabled:cursor-not-allowed disabled:opacity-60
+    }
+    .btn-link {
+      @apply inline-block w-full py-2 px-6 text-center text-lg leading-6 text-white font-extrabold bg-indigo-800 hover:bg-indigo-900 border-2 border-indigo-900 shadow rounded transition duration-200 disabled:cursor-not-allowed disabled:opacity-60
+    }
+    .danger {
+      @apply bg-red-600 border-red-600 hover:bg-red-700 hover:border-red-700
     }
   }

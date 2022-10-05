@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import VButton from '~/components/ui/Button.vue';
-const { loggedIn } = useAuth();
+const { user, loggedIn, logout } = useAuth();
 </script>
 
 <template>
@@ -9,11 +9,8 @@ const { loggedIn } = useAuth();
             <NuxtLink to="/" class="flex items-center">
                 <span class="self-center text-xl font-semibold whitespace-nowrap text-white">Nuxt 3 Auth Example</span>
             </NuxtLink>
-
             <div class="flex items-center justify-center">
-                <ul
-                    class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-                >
+                <ul class="flex flex-row py-4 gap-x-4 font-medium">
                     <li>
                         <NuxtLink to="/" class="nav-link" aria-current="page">Home</NuxtLink>
                     </li>
@@ -21,18 +18,16 @@ const { loggedIn } = useAuth();
                         <NuxtLink to="/dashboard" class="nav-link">Dashboard</NuxtLink>
                     </li>
                 </ul>
-                <div>
-                    <template v-if="!loggedIn">
-                        <NuxtLink to="/auth/login">
-                            <VButton class="!py-3 !mb-0">Login</VButton>
-                        </NuxtLink></template
-                    >
+                <ClientOnly>
+                    <div class="flex gap-x-2 ml-5">
+                    <template v-if="loggedIn">
+                        <VButton class="!mb-0 btn-link danger" @click="logout">Logout</VButton>
+                    </template>
                     <template v-else>
-                        <NuxtLink to="/auth/logout">
-                            <VButton class="!py-3 !mb-0 !bg-red-600">Logout</VButton>
-                        </NuxtLink>
+                        <NuxtLink class="btn-link" to="/auth/login">Login</NuxtLink>
                     </template>
                 </div>
+                </ClientOnly>
             </div>
         </div>
     </nav>
